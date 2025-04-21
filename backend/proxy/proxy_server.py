@@ -1,7 +1,7 @@
 import socket
 import threading
-from ..models import ProxySettings, ProxyLog
 from django.utils.timezone import now
+
 
 BUFFER_SIZE = 4096
 
@@ -12,10 +12,6 @@ blacklist_ips = [
 ]
 
 def handle_client(client_socket):
-    settings = ProxySettings.objects.first()
-    if not settings or not settings.proxy_enabled:
-        client_socket.close()
-        return
     
     # 1. Leer solicitud inicial
     try:
@@ -102,3 +98,6 @@ def start_proxy(listen_port=8888):
         client_sock, addr = proxy_socket.accept()
         print(f"[*] Accepted connection from {addr}")
         threading.Thread(target=handle_client, args=(client_sock,)).start()
+        
+if __name__ == '__main__':
+    start_proxy()

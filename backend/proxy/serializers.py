@@ -1,10 +1,14 @@
 from rest_framework import serializers
 from .models import ProxySettings, ProxyLog
+from rest_framework import serializers
+from .models import ProxySettings
 
 class ProxySettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProxySettings
-        fields = ['proxy_enabled', 'blacklist_enabled', 'logs_enabled']
+        fields = ['proxy_active', 'blacklist_active', 'logging_active']
+
+
 
 class ProxyLogSerializer(serializers.ModelSerializer):
     class Meta:
