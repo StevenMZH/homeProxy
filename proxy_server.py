@@ -1,6 +1,10 @@
 import socket
 import threading
 
+import requests
+from datetime import datetime
+
+
 BUFFER_SIZE = 4096
 
 # Configuraciones globales
@@ -8,9 +12,35 @@ proxy_running = True
 log_enabled = True
 blacklist_enabled = True
 blacklist_domains = [
-    'wikipedia.org',  # Ejemplo dominio
-    'facebook.com',  # Ejemplo dominio
+    'wikipedia.org',
+    'facebook.com', 
+    'fbcdn.net',
+    'googleapis.com'
 ]
+
+def log_request(client_ip, target_host, target_ip, status, request_data):
+    # Log normalization
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "client_ip": client_ip,
+        "target_host": target_host,
+        "target_ip": target_ip,
+        "status": status,
+        "request_data": request_data
+    }
+
+    # Post http request to send Logs to the Backend
+    try:
+        response = requests.post( "http://127.0.0.1:8000/proxy/logs/", json=log_entry, timeout=3 )
+        
+        if response.status_code == 201:
+            print("[*] Log enviado exitosamente al backend.")
+        else:
+            print(f"[!] Error enviando log al backend: {response.status_code}")
+    
+    except Exception as e:
+        print(f"[!] Fallo al enviar log: {e}")
+
 
 # Manejo del cliente proxy
 def handle_client(client_socket):
@@ -43,21 +73,43 @@ def handle_client(client_socket):
     host, port = target.split(':')
     port = int(port)
 
+    client_ip = client_socket.getpeername()[0]  # get_clientIp
+
     # Comprobación de blacklist por dominio
-    if blacklist_enabled and host in blacklist_domains:
+    if blacklist_enabled and any(black_domain in host for black_domain in blacklist_domains):
         print(f"[!] Bloqueado intento de acceso a {host}")
         client_socket.sendall(b"HTTP/1.1 403 Forbidden\r\n\r\nBlocked by proxy\r\n")
+        
+        if log_enabled:
+            log_request(
+                client_ip=client_ip,
+                target_host=host,
+                target_ip='0.0.0.0',  # No resolvimos IP real
+                status="BLOCKED",
+                request_data=first_line
+            )
+        
         client_socket.close()
         return
 
     try:
         remote_socket = socket.create_connection((host, port))
+        target_ip = remote_socket.getpeername()[0]
     except Exception as e:
         print("[!] Connection failed:", e)
         client_socket.close()
         return
 
     client_socket.sendall(b"HTTP/1.1 200 Connection Established\r\n\r\n")
+
+    if log_enabled:
+        log_request(
+            client_ip=client_ip,
+            target_host=host,
+            target_ip=target_ip,
+            status="CONNECTED",
+            request_data=first_line
+        )
 
     def forward(src, dst):
         while True:
@@ -72,7 +124,8 @@ def handle_client(client_socket):
     threading.Thread(target=forward, args=(client_socket, remote_socket)).start()
     threading.Thread(target=forward, args=(remote_socket, client_socket)).start()
 
-# Server de control
+
+# Setting Management
 def control_server(control_port=9999):
     global proxy_running, log_enabled, blacklist_enabled
 
@@ -106,6 +159,14 @@ def control_server(control_port=9999):
         elif data == 'DISABLE_BLACKLIST':
             blacklist_enabled = False
             client.sendall(b'OK')  
+        elif data == 'GET_LOGS':
+            try:
+                with open('proxy.log', 'r') as log_file:
+                    logs = log_file.read()
+                client.sendall(logs.encode('utf-8'))
+            except FileNotFoundError:
+                client.sendall(b'NO_LOGS')
+
         else:
             client.sendall(b'OK') 
 

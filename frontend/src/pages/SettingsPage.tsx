@@ -75,7 +75,7 @@ function SettingsPage() {
             <h3>Blacklist is {blacklistEnabled ? "Enabled" : "Disabled"}</h3>
             <h3>Logs are {logsEnabled ? "Enabled" : "Disabled"}</h3>
 
-            <SideIconButton icon="OnOff.png" text="Start/Stop Proxy" onClick={handleProxyToggle} />
+            <SideIconButton icon="/OnOff.png" text="Start/Stop Proxy" onClick={handleProxyToggle} />
             <button onClick={handleBlacklistToggle}>
                 {blacklistEnabled ? "Disable Blacklist" : "Enable Blacklist"}
             </button>
