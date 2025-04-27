@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --high1: #171717;
+  --high2: #333;
+  --high3: #555;
+  --high4: #777;
+  --high5: #999;
+
+  --low1: #fff;
+  --low2: #fff;
+  --low3: #ddd;
+  --low4: #f0f0f0;
+  --low5: #999;
+}
+
+/* @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+} */
+/* 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  
+    --high1: #fff;
+    --high2: #aaa;
+    --high3: #aaa;
+    --high4: #777;
+    --high5: #555;
+
+    --low1: #171717;
+    --low2: #171717;
+    --low3: #222;
+    --low4: #252525;
+    --low5: #444;
+  }
+} */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body, #root, main, .page {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+    padding:20px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+a, p, label, h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+a, button {
+    border: none;    
+    border-radius: 10px;
+}
+
+p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #555;
+}
+
+img {
+    border: none;    
+    width: 20px;
+    height: 20px;
+}
+
+.panel {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--low1);
+  box-shadow: 0 0 20px 5px #0002;
+}
+
+.text-sub {
+  font-size: 18px;
+}
+.text {
+  font-size: 14px;
+}
+
+
+table, thead {
+  background-color: #0000;
+  color: var(--high2);
+}
+
+td, th {
+  margin: 0;
+  border-bottom: var(--low5) 2px solid;
+}
+th{
+  padding: 15px 10px;
+}
+td {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 25px 15px;
+}
+
+thead tr {
+  background-color: var(--low4);
+  color: var(--high2);
+}
+
+tbody tr {
+  color: var(--high3);
+}
+tbody tr:hover {
+  color: var(--high1);
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px;
+  color: #fff;
+  background-color: var(--low5);
+  border-radius: 20px;
+}
+.connected-status { background-color: #2a5; }
+.blocked-status { background-color: #c25; }
+/* .request-connected { background-color: #2a52; }
+.request-blocked { background-color: #c252; } */
+
+/* @media (prefers-color-scheme: dark) {
+  .connected-status { background-color: #264; }
+  .blocked-status { background-color: #724; }
+
+  .request-connected { background-color: #2f51; }
+  .request-blocked { background-color: #f251; }
+} */
+
+@media (max-width: 1050px) {
+  .log-requestData { display: none; }
+}
+
+@media (max-width: 850px) {
+  .log-targetIP { display: none; }
+}
+
+@media (max-width: 850px) {
+  .log-status { display: none; }
+}

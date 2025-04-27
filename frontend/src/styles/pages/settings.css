@@ -1,0 +1,15 @@
+
+
+.text-sub {
+    color: var(--high3);
+}
+.text {
+    color: var(--high5);
+}
+
+.text-green {
+    color: #9ca;
+}
+.text-red {
+    color: #c9a;
+}

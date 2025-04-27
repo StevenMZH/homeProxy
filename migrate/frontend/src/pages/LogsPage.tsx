@@ -96,23 +96,23 @@ function LogsPage() {
                     <table className="min-w-full bg-white border border-gray-300">
                         <thead>
                             <tr className="bg-gray-100">
-                                <th className="py-2 px-4 border">Timestamp</th>
-                                <th className="py-2 px-4 border">Client IP</th>
-                                <th className="py-2 px-4 border">Target Host</th>
-                                <th className="py-2 px-4 border">Target IP</th>
-                                <th className="py-2 px-4 border">Status</th>
-                                <th className="py-2 px-4 border">Request Data</th>
+                                <th className="">Timestamp</th>
+                                <th className="">Client IP</th>
+                                <th className="">Target Host</th>
+                                <th className="">Target IP</th>
+                                <th className="">Status</th>
+                                <th className="">Request Data</th>
                             </tr>
                         </thead>
                         <tbody>
                             {logs.map((log) => (
                                 <tr key={log.id} className="hover:bg-gray-50">
-                                    <td className="py-2 px-4 border">{new Date(log.timestamp).toLocaleString()}</td>
-                                    <td className="py-2 px-4 border">{log.client_ip}</td>
-                                    <td className="py-2 px-4 border">{log.target_host}</td>
-                                    <td className="py-2 px-4 border">{log.target_ip}</td>
-                                    <td className="py-2 px-4 border">{log.status}</td>
-                                    <td className="py-2 px-4 border break-words max-w-xs">{log.request_data}</td>
+                                    <td className="">{new Date(log.timestamp).toLocaleString()}</td>
+                                    <td className="">{log.client_ip}</td>
+                                    <td className="">{log.target_host}</td>
+                                    <td className="">{log.target_ip}</td>
+                                    <td className="">{log.status}</td>
+                                    <td className=" break-words max-w-xs">{log.request_data}</td>
                                 </tr>
                             ))}
                         </tbody>

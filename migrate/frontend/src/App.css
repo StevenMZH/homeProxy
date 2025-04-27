@@ -19,12 +19,14 @@ html, body, #root, main, .page {
 .page {
     padding:20px;
     height: 100%;
+    box-sizing: border-box;
 }
 
 div, a, button, p, label, h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
     border: 0;
+    box-sizing: border-box;
 }
 
 a, button {
