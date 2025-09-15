@@ -21,7 +21,7 @@ export default function useWebSocket<T>(
         console.error("WebSocket message parse error:", err);
       }
     };
-    ws.onerror = (err) => console.error("WebSocket error:", err);
+    // ws.onerror = (err) => console.error("WebSocket error:", err);
     ws.onclose = () => console.log("WebSocket disconnected:", url);
 
     return () => {

@@ -28,7 +28,7 @@ export default function LogsPage() {
         <h1 className="text-2xl font-bold">Proxy Logs Dashboard</h1>
         <button
           onClick={handleDeleteLogs}
-          className="bg-red-500 hover:bg-red-700 text-white font-semibold px-2 py-1 rounded-lg"
+          className="bg-red-400 hover:bg-red-600 text-white font-semibold px-2 py-1 rounded-lg"
           disabled={deleting}
         >
           {deleting ? "Borrando..." : "Borrar Logs"}

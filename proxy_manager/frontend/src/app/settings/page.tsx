@@ -75,26 +75,29 @@ export default function SettingsPage() {
     if (!mounted) return null;
 
     return (
-        <div className="page gap-5">
-            <div className="text-center">
-                <h1 className="text-2xl font-bold mb-4">HTTPS Proxy Server</h1>
-                <p className="font-bold text-5xl">IP: 0.0.0.0</p>
+        <div className="page gap-10 ">
+            <div className="text-center flex flex-col gap-5">
+                <h1 className="text-4xl font-bold mb-4">HTTPS Proxy Admin</h1>
 
-                <div className="flex items-center justify-center gap-10">                    
-                    <p className="text-sub">Proxy: {proxyActive ? "Online" : "Offline"}</p>
-                    <p className="text-sub">Blacklist: {blacklistEnabled ? "Enabled" : "Disabled"}</p>
-                    <p className="text-sub">Logs: {logsEnabled ? "Enabled" : "Disabled"}</p>
+                <div className="flex items-center justify-center gap-10">
+                    <div className="flex flex-col justify-center w-36 gap-2">
+                        <p className="text-sub2">Proxy:</p>
+                        <p className={`tag ${proxyActive ? "enabled" : "disabled"}`}>{proxyActive ? "Online" : "Offline"}</p>                
+                    </div>                 
+                    <div className="flex flex-col justify-center w-36 gap-2">
+                        <p className="text-sub2">Blacklist:</p>
+                        <p className={`tag ${blacklistEnabled ? "enabled" : "disabled"}`}>{blacklistEnabled ? "Enabled" : "Disabled"}</p> 
+                    </div>   
+                    <div className="flex flex-col justify-center w-36 gap-2">
+                        <p className="text-sub2">Log Storage:</p>
+                        <p className={`tag ${logsEnabled ? "enabled" : "disabled"}`}>{logsEnabled ? "Enabled" : "Disabled"}</p>
+                    </div>
                 </div>
             </div>
 
 
-            <div className="flex gap-5 w-full">
-                <div className="w-2/3">
-                    <Logs/>
-                </div>
-            
-            
-                <div className="panel flex flex-col gap-5 w-1/3 min-w-1xl">
+            <div className="flex w-full flex-col gap-10">
+                <div className="panel flex flex-col gap-5 w-full">
 
                     <div className="flex items-center justify-between">
                         <div>
@@ -119,6 +122,10 @@ export default function SettingsPage() {
                         </div>
                         <ToggleButton checked={logsEnabled} onChange={handleLogsToggle} />
                     </div>
+                </div>
+
+                <div className="w-full">
+                    <Logs/>
                 </div>
 
                 {/* Opcionalmente puedes eliminar estos botones si solo usarás ToggleButtons */}

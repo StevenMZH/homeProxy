@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #e4e8f0;
   --foreground: #171717;
 
   --high1: #171717;
@@ -11,7 +11,7 @@
   --high5: #999;
 
   --low1: #fff;
-  --low2: #fff;
+  --low2: #f0f5f9;
   --low3: #ddd;
   --low4: #f0f0f0;
   --low5: #999;
@@ -105,8 +105,8 @@ img {
 .panel {
   padding: 20px;
   border-radius: 10px;
-  background-color: var(--low1);
-  box-shadow: 0 0 20px 5px #0002;
+  background-color: var(--low2);
+  box-shadow: 0 0 10px 0px #0001;
 }
 
 .text-sub {
@@ -114,6 +114,9 @@ img {
 }
 .text {
   font-size: 14px;
+}
+.text-sub2 {
+  font-size: 16px;
 }
 
 
@@ -160,8 +163,15 @@ tbody tr:hover {
 }
 .connected-status { background-color: #2a5; }
 .blocked-status { background-color: #c25; }
-/* .request-connected { background-color: #2a52; }
-.request-blocked { background-color: #c252; } */
+.request-connected { background-color: #2a52; }
+.request-blocked { background-color: #c252; }
+
+.enabled {
+  background-color: #5c9
+}
+.disabled {
+  background-color: #f57;
+}
 
 /* @media (prefers-color-scheme: dark) {
   .connected-status { background-color: #264; }
