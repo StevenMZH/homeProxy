@@ -27,8 +27,17 @@ A HTTPS proxy server with a modern web interface for managing proxy settings, en
 
 ## Diagrams
 
+### Infrastructure
 <div align="center" display="flex">
   <img src="docs/diagrams/infrastructure.png" width="600"> <br/> 
+</div>
+
+### User Cases
+<div align="center" display="flex">
   <img src="docs/diagrams/user_cases.png" width="400"> <br/>
+</div>
+
+### Sequential Diagram
+<div align="center" display="flex">
   <img src="docs/diagrams/sequential.png" width="800"> <br/>
 </div>
